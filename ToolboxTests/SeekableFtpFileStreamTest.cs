@@ -4,6 +4,7 @@ using System.IO;
 using Toolbox.IO;
 using System.Net;
 using System.Linq;
+using System.IO.Compression;
 
 namespace ToolboxTests
 {
@@ -209,6 +210,20 @@ namespace ToolboxTests
 
             Assert.AreEqual(expectedPosition, _stream.Position);
             Assert.AreEqual(expectedByte, 80);
+        }
+
+        [TestMethod]
+        public void ReadFtpZipFileTest()
+        {
+            int expected = 17;
+            int entryCount;
+
+            using (ZipArchive archive = new ZipArchive(_stream))
+            {
+                entryCount = archive.Entries.Count;
+            }
+
+            Assert.AreEqual(expected, entryCount);
         }
     }
 }
