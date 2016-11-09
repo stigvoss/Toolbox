@@ -130,6 +130,7 @@ namespace Toolbox.IO
         /// <summary>
         /// Connect to request with offset
         /// </summary>
+        /// <exception cref="FileNotFoundException">If unable to open stream</exception>
         /// <param name="request">FtpWebRequest for file download</param>
         /// <param name="offset">Offset on file stream</param>
         private void Connect(FtpWebRequest request, long offset = 0)
@@ -138,6 +139,9 @@ namespace Toolbox.IO
             request.ContentOffset = offset;
             // Request response
             _response = (FtpWebResponse)request.GetResponse();
+            // If wrong status code, throw exception
+            if (_response.StatusCode != FtpStatusCode.OpeningData)
+                throw new FileNotFoundException("Unable to open data stream");
             // Open stream for reading
             _stream = _response.GetResponseStream();
         }
