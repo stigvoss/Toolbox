@@ -40,7 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\BlockingCollectionExtensions.cs" />
     <Compile Include="Extensions\FtpWebRequestExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TaskFactoryExtensions.cs" />
+    <Compile Include="Extensions\XmlNodeExtensions.cs" />
     <Compile Include="IO\SeekableFtpFileStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
