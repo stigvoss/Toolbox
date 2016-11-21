@@ -46,6 +46,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TaskFactoryExtensions.cs" />
     <Compile Include="Extensions\XmlNodeExtensions.cs" />
+    <Compile Include="Extensions\XmlReaderExtensions.cs" />
     <Compile Include="IO\SeekableFtpFileStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
