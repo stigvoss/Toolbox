@@ -154,7 +154,6 @@ namespace Toolbox.IO
             // Clean up response if exists
             if (_response != null)
             {
-                _response.Close();
                 _response.Dispose();
                 _response = null;
             }
@@ -162,7 +161,6 @@ namespace Toolbox.IO
             // Clean up stream if exists
             if (_stream != null)
             {
-                _stream.Close();
                 _stream.Dispose();
                 _stream = null;
             }
