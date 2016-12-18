@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox", "Toolbox\Toolbox.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolboxTests", "ToolboxTests\ToolboxTests.csproj", "{E8C75CB7-7640-44CA-BCE9-1008FD3C4A54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Oracle", "Toolbox.Oracle\Toolbox.Oracle.csproj", "{B2F8B211-98BB-4DCD-88EC-5F43E37B235D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E8C75CB7-7640-44CA-BCE9-1008FD3C4A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8C75CB7-7640-44CA-BCE9-1008FD3C4A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8C75CB7-7640-44CA-BCE9-1008FD3C4A54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2F8B211-98BB-4DCD-88EC-5F43E37B235D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2F8B211-98BB-4DCD-88EC-5F43E37B235D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2F8B211-98BB-4DCD-88EC-5F43E37B235D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2F8B211-98BB-4DCD-88EC-5F43E37B235D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
