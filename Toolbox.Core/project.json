@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "Microsoft.NETCore.App": "1.1.0",
+    "System.Data.Common": "4.1.0"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8",
+        "dnxcore50"
+      ]
+    }
+  },
+  "version": "1.0.0-*"
+}

@@ -59,11 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Base\IRepositoryType.cs" />
-    <Compile Include="Data\Base\IRepository.cs" />
-    <Compile Include="Data\DbActionContext.cs" />
-    <Compile Include="Data\DbActionContextFactory.cs" />
-    <Compile Include="Data\DbRepository.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\BlockingCollectionExtensions.cs" />
     <Compile Include="Extensions\DbCommandExtensions.cs" />
