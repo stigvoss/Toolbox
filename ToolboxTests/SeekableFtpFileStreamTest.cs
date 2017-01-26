@@ -11,17 +11,17 @@ namespace ToolboxTests
     [TestClass]
     public class SeekableFtpFileStreamTest
     {
-        const string URL_FILE = "ftp://ftp.swfwmd.state.fl.us/pub/out/TPolk.zip";
-        const long URL_FILE_LENGTH = 789556976;
+        const string URL_FILE = "ftp://ftp.eenet.ee/pub/mariadb/mariadb-10.1.19/winx64-packages/mariadb-10.1.19-winx64.zip";
+        const long URL_FILE_LENGTH = 333630731;
 
         SeekableFtpFileStream _stream;
 
         [TestInitialize]
         public void Initialize()
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.swfwmd.state.fl.us/pub/out/TPolk.zip");
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(URL_FILE);
 
-            request.Credentials = new NetworkCredential("anonymous", "tests@toolbox.org");
+            request.Credentials = new NetworkCredential("anonymous", "");
             request.Method = WebRequestMethods.Ftp.DownloadFile;
 
             _stream = new SeekableFtpFileStream(request);
@@ -87,7 +87,7 @@ namespace ToolboxTests
         [TestMethod]
         public void ReadCurrentTest()
         {
-            byte[] expectedBytes = new byte[] { 0, 0, 184, 170, 15, 47, 0, 0 };
+            byte[] expectedBytes = new byte[] { 28, 0, 234, 159, 198, 19, 0, 0 };
             int expectedBytesRead = 8;
 
             byte[] buffer = new byte[8];
@@ -105,7 +105,7 @@ namespace ToolboxTests
         [TestMethod]
         public void ReadEndTest()
         {
-            byte[] expectedBytes = new byte[] { 0, 0, 184, 170, 15, 47, 0, 0 };
+            byte[] expectedBytes = new byte[] { 28, 0, 234, 159, 198, 19, 0, 0 };
             int expectedBytesRead = 8;
 
             long target = -8;
@@ -215,7 +215,7 @@ namespace ToolboxTests
         [TestMethod]
         public void ReadFtpZipFileTest()
         {
-            int expected = 17;
+            int expected = 12348;
             int entryCount;
 
             using (ZipArchive archive = new ZipArchive(_stream))

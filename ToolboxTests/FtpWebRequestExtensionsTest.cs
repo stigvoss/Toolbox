@@ -10,6 +10,9 @@ namespace ToolboxTests
     [TestClass]
     public class FtpWebRequestExtensionsTest
     {
+        const string URL_FILE = "ftp://ftp.eenet.ee/pub/mariadb/mariadb-10.1.19/winx64-packages/mariadb-10.1.19-winx64.zip";
+        const long URL_FILE_LENGTH = 333630731;
+
         [TestMethod]
         public void CloneTest()
         {
@@ -39,7 +42,7 @@ namespace ToolboxTests
         [TestMethod]
         public void GetSeekableResponseStreamTest()
         {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.swfwmd.state.fl.us/pub/out/TPolk.zip");
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(URL_FILE);
 
             request.Credentials = new NetworkCredential("anonymous", "tests@toolbox.org");
             request.Method = WebRequestMethods.Ftp.DownloadFile;

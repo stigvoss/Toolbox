@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cryptography\HashedPassword.cs" />
+    <Compile Include="Cryptography\Base\IPassword.cs" />
+    <Compile Include="Cryptography\PasswordHashing.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\BlockingCollectionExtensions.cs" />
     <Compile Include="Extensions\DbCommandExtensions.cs" />
