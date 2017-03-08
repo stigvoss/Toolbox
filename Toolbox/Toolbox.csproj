@@ -78,6 +78,16 @@
     <Compile Include="Extensions\XmlReaderExtensions.cs" />
     <Compile Include="IO\SeekableFtpFileStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\Base\Block.cs" />
+    <Compile Include="Threading\Base\EndBlock.cs" />
+    <Compile Include="Threading\Base\IBlock.cs" />
+    <Compile Include="Threading\Base\IConsumer.cs" />
+    <Compile Include="Threading\Base\InitialBlock.cs" />
+    <Compile Include="Threading\Base\IProducer.cs" />
+    <Compile Include="Threading\Base\LinkBlock.cs" />
+    <Compile Include="Threading\Base\Pipeline.cs" />
+    <Compile Include="Threading\BlockArgs.cs" />
+    <Compile Include="Threading\Exception\PipelineProcessingException.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

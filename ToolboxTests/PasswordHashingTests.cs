@@ -162,8 +162,8 @@ namespace ToolboxTests
 
             third = sw.ElapsedTicks;
 
-            Assert.IsTrue(first * 1.5 < second);
-            Assert.IsTrue(second * 1.5 < third);
+            Assert.IsTrue(first < second);
+            Assert.IsTrue(second < third);
         }
     }
 }
