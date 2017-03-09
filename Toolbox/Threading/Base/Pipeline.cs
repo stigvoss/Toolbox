@@ -83,7 +83,7 @@ namespace Toolbox.Threading.Base
 
                 for (int i = 0; i < config.ThreadCount; i++)
                 {
-                    Task task = Task.Factory.StartNew(() => block.Run(), TaskCreationOptions.LongRunning);
+                    Task task = Task.Factory.StartNew(() => block.Run(), _tokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                     _tasks.Add(task);
                 }
             }

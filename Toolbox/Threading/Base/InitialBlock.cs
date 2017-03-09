@@ -22,6 +22,10 @@ namespace Toolbox.Threading.Base
             get { return _out; }
         }
 
+        public override void Initialize()
+        {
+        }
+
         public override void Done()
         {
             _out.CompleteAdding();
@@ -54,12 +58,12 @@ namespace Toolbox.Threading.Base
 
         public TBlock Then<TBlock>(BlockArgs args) where TBlock : Block, IConsumer<TOutput>, new()
         {
-            TBlock block = new TBlock();
-
-            block.Pipeline = Pipeline;
-            block.Source = Output;
-            block.Arguments = args;
-
+            TBlock block = new TBlock()
+            {
+                Pipeline = Pipeline,
+                Source = Output,
+                Arguments = args
+            };
             Pipeline.Add(block);
 
             return block;
@@ -67,12 +71,12 @@ namespace Toolbox.Threading.Base
 
         public Pipeline Finally<TBlock>(BlockArgs args) where TBlock : EndBlock<TOutput>, new()
         {
-            TBlock block = new TBlock();
-
-            block.Pipeline = Pipeline;
-            block.Source = Output;
-            block.Arguments = args;
-
+            TBlock block = new TBlock()
+            {
+                Pipeline = Pipeline,
+                Source = Output,
+                Arguments = args
+            };
             Pipeline.Add(block);
 
             Pipeline.Start();

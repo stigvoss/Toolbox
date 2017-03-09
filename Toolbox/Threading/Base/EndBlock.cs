@@ -39,6 +39,10 @@ namespace Toolbox.Threading.Base
         {
         }
 
+        public override void Initialize()
+        {
+        }
+
         protected abstract void Process(TInput item);
     }
 }

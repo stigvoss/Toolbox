@@ -10,6 +10,8 @@ namespace Toolbox.Threading.Base
     public interface IBlock
     {
         Pipeline Pipeline { get; set; }
+
+        void Initialize();
         
         void Execute(BlockArgs args);
 

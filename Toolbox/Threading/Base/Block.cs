@@ -46,6 +46,7 @@ namespace Toolbox.Threading.Base
         {
             try
             {
+                Initialize();
                 Execute(_args);
             }
             finally
@@ -59,6 +60,8 @@ namespace Toolbox.Threading.Base
         }
 
         public abstract void Done();
+
+        public abstract void Initialize();
 
         public static implicit operator Pipeline(Block block)
         {
