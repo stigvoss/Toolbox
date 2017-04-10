@@ -22,9 +22,18 @@ namespace Toolbox.Threading.Base
             get { return _out; }
         }
 
-        public override void Initialize()
+        public override void Initialize(BlockArgs args)
         {
         }
+
+        public override void Execute()
+        {
+            Initialize(Arguments);
+            Execute(Output);
+            Done();
+        }
+
+        public abstract void Execute(BlockingCollection<TOutput> output);
 
         public override void Done()
         {

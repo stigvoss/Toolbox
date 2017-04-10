@@ -88,8 +88,10 @@
     <Compile Include="Threading\Base\Pipeline.cs" />
     <Compile Include="Threading\BlockArgs.cs" />
     <Compile Include="Threading\Bundle.cs" />
+    <Compile Include="Threading\BundleArgs.cs" />
     <Compile Include="Threading\Collection\ConcurrentHashSet.cs" />
     <Compile Include="Threading\Exception\PipelineProcessingException.cs" />
+    <Compile Include="Threading\Unbundle.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,7 +16,7 @@ namespace Toolbox.Threading.Base
 
         private BlockArgs _args = new BlockArgs();
 
-        internal BlockArgs Arguments
+        public BlockArgs Arguments
         {
             get { return _args; }
             set { _args = value; }
@@ -40,14 +40,14 @@ namespace Toolbox.Threading.Base
             return Pipeline;
         }
 
-        public abstract void Execute(BlockArgs args);
+        public abstract void Execute();
 
         public void Run()
         {
             try
             {
-                Initialize();
-                Execute(_args);
+                Initialize(_args);
+                Execute();
             }
             finally
             {
@@ -61,7 +61,7 @@ namespace Toolbox.Threading.Base
 
         public abstract void Done();
 
-        public abstract void Initialize();
+        public abstract void Initialize(BlockArgs args);
 
         public static implicit operator Pipeline(Block block)
         {

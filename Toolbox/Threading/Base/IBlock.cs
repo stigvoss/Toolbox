@@ -11,9 +11,9 @@ namespace Toolbox.Threading.Base
     {
         Pipeline Pipeline { get; set; }
 
-        void Initialize();
+        void Initialize(BlockArgs args);
         
-        void Execute(BlockArgs args);
+        void Execute();
 
         void Done();
     }

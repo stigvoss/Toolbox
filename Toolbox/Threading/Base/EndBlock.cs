@@ -18,7 +18,7 @@ namespace Toolbox.Threading.Base
             set { _in = value; }
         }
 
-        public override void Execute(BlockArgs args)
+        public override void Execute()
         {
             foreach (TInput item in Source.GetConsumingEnumerable())
             {
@@ -39,7 +39,7 @@ namespace Toolbox.Threading.Base
         {
         }
 
-        public override void Initialize()
+        public override void Initialize(BlockArgs args)
         {
         }
 
