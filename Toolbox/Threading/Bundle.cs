@@ -7,7 +7,7 @@ using Toolbox.Threading.Base;
 
 namespace Toolbox.Threading
 {
-    public class Bundle<T> : LinkBlock<T, IEnumerable<T>>
+    public class Bundle<T> : IntermediateBlock<T, IEnumerable<T>>
     {
         List<T> _bundle = null;
 

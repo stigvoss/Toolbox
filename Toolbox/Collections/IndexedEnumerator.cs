@@ -24,7 +24,7 @@ namespace Toolbox.Collections
 
         public (T element, int index) Current => (_enumerator.Current, _index);
 
-        object IEnumerator.Current => (_enumerator.Current, _index);
+        object IEnumerator.Current => Current;
 
         public void Dispose()
         {

@@ -7,7 +7,7 @@ using Toolbox.Threading.Base;
 
 namespace Toolbox.Threading
 {
-    public class Unbundle<T> : LinkBlock<IEnumerable<T>, T>
+    public class Unbundle<T> : IntermediateBlock<IEnumerable<T>, T>
     {
 
         protected override T Process(IEnumerable<T> items)

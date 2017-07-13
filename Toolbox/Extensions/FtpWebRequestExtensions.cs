@@ -12,7 +12,7 @@ namespace Toolbox.Extensions
 {
     public static class FtpWebRequestExtensions
     {
-        public static Stream GetSeekableResponseStream(this FtpWebRequest request)
+        public static SeekableFtpFileStream GetSeekableFileStream(this FtpWebRequest request)
         {
             return new SeekableFtpFileStream(request);
         }

@@ -10,7 +10,6 @@ namespace Toolbox.Threading.Base
     public abstract class Block : IBlock
     {
         private Pipeline _pipeline = null;
-        private CancellationToken _token;
 
         private int _threadsDone = 0;
 
@@ -62,10 +61,5 @@ namespace Toolbox.Threading.Base
         public abstract void Done();
 
         public abstract void Initialize(BlockArgs args);
-
-        public static implicit operator Pipeline(Block block)
-        {
-            return block.Pipeline;
-        }
     }
 }

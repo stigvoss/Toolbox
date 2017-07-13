@@ -47,7 +47,7 @@ namespace ToolboxTests
             request.Credentials = new NetworkCredential("anonymous", "tests@toolbox.org");
             request.Method = WebRequestMethods.Ftp.DownloadFile;
 
-            Stream stream = request.GetSeekableResponseStream();
+            Stream stream = request.GetSeekableFileStream();
 
             Assert.IsInstanceOfType(stream, typeof(SeekableFtpFileStream));
         }

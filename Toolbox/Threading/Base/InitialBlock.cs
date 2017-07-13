@@ -29,11 +29,11 @@ namespace Toolbox.Threading.Base
         public override void Execute()
         {
             Initialize(Arguments);
-            Execute(Output);
+            Process();
             Done();
         }
 
-        public abstract void Execute(BlockingCollection<TOutput> output);
+        public abstract void Process();
 
         public override void Done()
         {
@@ -53,7 +53,7 @@ namespace Toolbox.Threading.Base
             return Then<TBlock>(args);
         }
 
-        public Pipeline Finally<TBlock>(int threadCount = 1, BlockArgs args = null) where TBlock : EndBlock<TOutput>, new()
+        public Pipeline Finally<TBlock>(int threadCount = 1, BlockArgs args = null) where TBlock : FinalBlock<TOutput>, new()
         {
             if (args == null)
             {
@@ -78,7 +78,7 @@ namespace Toolbox.Threading.Base
             return block;
         }
 
-        public Pipeline Finally<TBlock>(BlockArgs args) where TBlock : EndBlock<TOutput>, new()
+        public Pipeline Finally<TBlock>(BlockArgs args) where TBlock : FinalBlock<TOutput>, new()
         {
             TBlock block = new TBlock()
             {
@@ -90,7 +90,7 @@ namespace Toolbox.Threading.Base
 
             Pipeline.Start();
 
-            return this;
+            return block;
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Toolbox.Threading.Base
 {
-    public abstract class LinkBlock<TInput, TOutput> : Block, IProducer<TOutput>, IConsumer<TInput>
+    public abstract class IntermediateBlock<TInput, TOutput> : Block, IProducer<TOutput>, IConsumer<TInput>
     {
         private BlockingCollection<TOutput> _out = new BlockingCollection<TOutput>();
         private BlockingCollection<TInput> _in = new BlockingCollection<TInput>();
@@ -69,7 +69,7 @@ namespace Toolbox.Threading.Base
             return Then<TBlock>(args);
         }
 
-        public Pipeline Finally<TBlock>(int threadCount = 1, BlockArgs args = null) where TBlock : EndBlock<TOutput>, new()
+        public Pipeline Finally<TBlock>(int threadCount = 1, BlockArgs args = null) where TBlock : FinalBlock<TOutput>, new()
         {
             if (args == null)
             {
@@ -94,7 +94,7 @@ namespace Toolbox.Threading.Base
             return block;
         }
 
-        public Pipeline Finally<TBlock>(BlockArgs args) where TBlock : EndBlock<TOutput>, new()
+        public Pipeline Finally<TBlock>(BlockArgs args) where TBlock : FinalBlock<TOutput>, new()
         {
             TBlock block = new TBlock()
             {
@@ -106,7 +106,7 @@ namespace Toolbox.Threading.Base
 
             Pipeline.Start();
 
-            return this;
+            return block;
         }
     }
 }

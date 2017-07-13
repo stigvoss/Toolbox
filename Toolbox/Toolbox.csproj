@@ -96,12 +96,12 @@
     <Compile Include="Logging\Base\LoggingProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Threading\Base\Block.cs" />
-    <Compile Include="Threading\Base\EndBlock.cs" />
+    <Compile Include="Threading\Base\FinalBlock.cs" />
     <Compile Include="Threading\Base\IBlock.cs" />
     <Compile Include="Threading\Base\IConsumer.cs" />
     <Compile Include="Threading\Base\InitialBlock.cs" />
     <Compile Include="Threading\Base\IProducer.cs" />
-    <Compile Include="Threading\Base\LinkBlock.cs" />
+    <Compile Include="Threading\Base\IntermediateBlock.cs" />
     <Compile Include="Threading\Base\Pipeline.cs" />
     <Compile Include="Threading\BlockArgs.cs" />
     <Compile Include="Threading\Bundle.cs" />

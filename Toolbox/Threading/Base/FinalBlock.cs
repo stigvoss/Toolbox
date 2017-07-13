@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Toolbox.Threading.Base
 {
-    public abstract class EndBlock<TInput> : Block, IConsumer<TInput>
+    public abstract class FinalBlock<TInput> : Block, IConsumer<TInput>
     {
         private BlockingCollection<TInput> _in = new BlockingCollection<TInput>();
         
@@ -44,5 +44,10 @@ namespace Toolbox.Threading.Base
         }
 
         protected abstract void Process(TInput item);
+
+        public static implicit operator Pipeline(FinalBlock<TInput> block)
+        {
+            return block.Pipeline;
+        }
     }
 }
