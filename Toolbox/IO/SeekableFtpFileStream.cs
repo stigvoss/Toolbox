@@ -31,6 +31,8 @@ namespace Toolbox.IO
         // Response field to allow closing connections
         private FtpWebResponse _response = null;
 
+        private bool _isDisposed = false;
+
         // Response stream field for reading
         private Stream _stream;
 
@@ -173,7 +175,7 @@ namespace Toolbox.IO
         {
             get
             {
-                return (Position < Length);
+                return (Position < Length) && !_isDisposed;
             }
         }
 
@@ -335,6 +337,7 @@ namespace Toolbox.IO
         public new void Dispose()
         {
             CloseConnection();
+            _isDisposed = true;
         }
     }
 }

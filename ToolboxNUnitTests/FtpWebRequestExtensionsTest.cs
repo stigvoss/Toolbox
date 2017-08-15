@@ -3,17 +3,17 @@ using System.Net;
 using Toolbox.Extensions;
 using System.IO;
 using Toolbox.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace ToolboxTests
 {
-    [TestClass]
+    [TestFixture]
     public class FtpWebRequestExtensionsTest
     {
         const string URL_FILE = "ftp://ftp.eenet.ee/pub/mariadb/mariadb-10.1.19/winx64-packages/mariadb-10.1.19-winx64.zip";
         const long URL_FILE_LENGTH = 333630731;
 
-        [TestMethod]
+        [Test]
         public void CloneTest()
         {
             string url = "ftp://ftp.contoso.com/";
@@ -39,7 +39,7 @@ namespace ToolboxTests
             Assert.AreEqual(1, clone.Headers.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void GetSeekableResponseStreamTest()
         {
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(URL_FILE);
@@ -49,7 +49,7 @@ namespace ToolboxTests
 
             Stream stream = request.GetSeekableFileStream();
 
-            Assert.IsInstanceOfType(stream, typeof(SeekableFtpFileStream));
+            Assert.IsInstanceOf<SeekableFtpFileStream>(stream);
         }
     }
 }
