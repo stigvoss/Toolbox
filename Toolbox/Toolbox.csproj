@@ -82,6 +82,7 @@
     <Compile Include="Extensions\XmlNodeExtensions.cs" />
     <Compile Include="Extensions\XmlReaderExtensions.cs" />
     <Compile Include="IO\SeekableFtpFileStream.cs" />
+    <Compile Include="IO\TimeoutStream.cs" />
     <Compile Include="Logging\Args\DefaultInitalizationArgs.cs" />
     <Compile Include="Logging\Args\EventLogInitializationArgs.cs" />
     <Compile Include="Logging\Base\IProviderInitializationArgs.cs" />
