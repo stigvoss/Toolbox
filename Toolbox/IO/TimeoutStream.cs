@@ -63,13 +63,16 @@ namespace Toolbox.IO
 
         public override int Read(byte[] buffer, int offset, int count)
         {
+            int result;
+
             if (_baseStream.CanRead && !_baseStream.CanTimeout)
             {
                 try
                 {
                     _source.CancelAfter(_readTimeout);
-                    Task<int> task = _baseStream.ReadAsync(buffer, offset, count, _source.Token);
-                    return task.Result;
+                    Task<int> task = _baseStream.ReadAsync(buffer, offset, count, 
+                        _source.Token);
+                    result = task.Result;
                 }
                 catch (AggregateException)
                 {
@@ -79,8 +82,10 @@ namespace Toolbox.IO
             }
             else
             {
-                return _baseStream.Read(buffer, offset, count);
+                result = _baseStream.Read(buffer, offset, count);
             }
+
+            return result;
         }
 
         public override long Seek(long offset, SeekOrigin origin)
