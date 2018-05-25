@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{040EACF1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Validation.Tests", "..\..\Unit Tests\Toolbox\Toolbox.Validation.Tests\Toolbox.Validation.Tests.csproj", "{5C6C4999-1DDD-4101-AC72-790AB5A8A3F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Extensions.Tests", "Toolbox.Extensions.Tests\Toolbox.Extensions.Tests.csproj", "{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{5C6C4999-1DDD-4101-AC72-790AB5A8A3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C6C4999-1DDD-4101-AC72-790AB5A8A3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C6C4999-1DDD-4101-AC72-790AB5A8A3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C6C4999-1DDD-4101-AC72-790AB5A8A3F7} = {040EACF1-1CBE-4DEE-96AF-595890F2AFF9}
+		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6} = {040EACF1-1CBE-4DEE-96AF-595890F2AFF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0C83573-BBB5-4F5C-9C76-DD2EDF8B4B5C}
