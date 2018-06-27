@@ -9,7 +9,10 @@ namespace Toolbox.Collections.Concurrent
 {
     public class ConcurrentHashSet<T> : ISet<T>
     {
-        HashSet<T> _hashSet = new HashSet<T>();
+        HashSet<T> _hashSet;
+
+        public ConcurrentHashSet()
+            : this(new HashSet<T>()) { }
 
         public ConcurrentHashSet(HashSet<T> hashSet)
         {
