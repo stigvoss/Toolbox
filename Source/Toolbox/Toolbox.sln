@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Validation.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Extensions.Tests", "Toolbox.Extensions.Tests\Toolbox.Extensions.Tests.csproj", "{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Threading.Tasks.Dataflow", "Toolbox.Threading.Tasks.Dataflow\Toolbox.Threading.Tasks.Dataflow.csproj", "{A9E478D5-FC38-4E3A-96A8-F1EC43DB94F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E478D5-FC38-4E3A-96A8-F1EC43DB94F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E478D5-FC38-4E3A-96A8-F1EC43DB94F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E478D5-FC38-4E3A-96A8-F1EC43DB94F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E478D5-FC38-4E3A-96A8-F1EC43DB94F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
