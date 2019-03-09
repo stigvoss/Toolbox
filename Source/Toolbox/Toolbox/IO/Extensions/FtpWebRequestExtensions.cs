@@ -43,7 +43,9 @@ namespace Toolbox.IO.Extensions
                     {
                         Type exceptionType = ex.InnerException.GetType();
                         if (exceptionType != typeof(NotSupportedException) && exceptionType != typeof(NotImplementedException))
+                        {
                             throw ex;
+                        }
                     }
                 }
             }

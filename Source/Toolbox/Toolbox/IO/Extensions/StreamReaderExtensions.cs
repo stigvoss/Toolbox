@@ -9,11 +9,9 @@ namespace Toolbox.IO.Extensions
     {
         public static bool ReadLine(this StreamReader reader, out string line)
         {
-            var readLine = reader.ReadLine();
+            line = reader.ReadLine();
 
-            line = readLine;
-
-            return readLine != null;
+            return line != null;
         }
     }
 }

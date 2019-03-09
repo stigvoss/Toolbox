@@ -26,10 +26,7 @@ namespace Toolbox.Collections.Generic
 
         object IEnumerator.Current => Current;
 
-        public void Dispose()
-        {
-            _enumerator.Dispose();
-        }
+        public void Dispose() => _enumerator.Dispose();
 
         public bool MoveNext()
         {

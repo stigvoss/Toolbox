@@ -11,8 +11,8 @@ namespace Toolbox.Xml.Extensions
     {
         public static T GetElementContentAs<T>(this XmlNode node, string xpath, XmlNamespaceManager nsmgr = null)
         {
-            XmlNode element = null;
-            T result = default(T);
+            XmlNode element;
+            T result = default;
 
             if (nsmgr != null)
             {

@@ -16,14 +16,8 @@ namespace Toolbox.Collections.Generic
             _collection = collection;
         }
 
-        public IEnumerator<(T element, int index)> GetEnumerator()
-        {
-            return new IndexedEnumerator<T>(_collection);
-        }
+        public IEnumerator<(T element, int index)> GetEnumerator() => new IndexedEnumerator<T>(_collection);
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return new IndexedEnumerator<T>(_collection);
-        }
+        IEnumerator IEnumerable.GetEnumerator() => new IndexedEnumerator<T>(_collection);
     }
 }
