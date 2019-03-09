@@ -18,7 +18,9 @@ namespace Toolbox.Extensions
         public static DirectoryInfo GetDirectoryInfo(this Uri uri)
         {
             if (uri.IsFile)
+            {
                 throw new ArgumentException("Uri is not a directory");
+            }
 
             return new DirectoryInfo(uri.LocalPath);
         }

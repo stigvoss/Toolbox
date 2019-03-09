@@ -131,7 +131,9 @@ namespace Toolbox.IO
 
             // If unexpected status code, throw exception
             if (_response.StatusCode != FtpStatusCode.OpeningData)
+            {
                 throw new FileNotFoundException("Unable to open data stream");
+            }
 
             _stream = _response.GetResponseStream();
         }
@@ -159,43 +161,22 @@ namespace Toolbox.IO
         /// <summary>
         /// If position is smaller than length, stream can read.
         /// </summary>
-        public override bool CanRead
-        {
-            get
-            {
-                return (Position < Length) && !_isDisposed;
-            }
-        }
+        public override bool CanRead => (Position < Length) && !_isDisposed;
 
         /// <summary>
         /// Always true
         /// </summary>
-        public override bool CanSeek
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool CanSeek => true;
 
         /// <summary>
         /// Always false
         /// </summary>
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool CanWrite => false;
 
         /// <summary>
         /// Gets length of file
         /// </summary>
-        public override long Length
-        {
-            get { return _length; }
-        }
+        public override long Length => _length;
 
 
         /// <summary>
@@ -203,24 +184,14 @@ namespace Toolbox.IO
         /// </summary>
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
-
-            set
-            {
-                _position = value;
-            }
+            get => _position;
+            set => _position = value;
         }
 
         /// <summary>
         /// Always throws NotSupportedException
         /// </summary>
-        public override void Flush()
-        {
-            throw new NotSupportedException();
-        }
+        public override void Flush() => throw new NotSupportedException();
 
         /// <summary>
         /// Reads from stream to buffer
@@ -276,27 +247,39 @@ namespace Toolbox.IO
             {
                 case SeekOrigin.Begin:
                     if (offset < 0)
+                    {
                         throw new ArgumentException("Cannot seek before beginning.");
+                    }
                     if (offset > _length)
+                    {
                         throw new ArgumentException("Cannot seek after ending.");
+                    }
                     // Set position to offset
                     _position = offset;
                     break;
                 case SeekOrigin.End:
                     if (offset > 0)
+                    {
                         throw new ArgumentException("Cannot seek after ending.");
+                    }
                     if (offset < _length * -1)
+                    {
                         throw new ArgumentException("Cannot seek before beginning.");
+                    }
                     // Add offset to file _length
                     _position = _length + offset;
                     break;
                 default:
                     if (_position + offset < 0)
+                    {
                         throw new ArgumentException("Cannot seek before beginning.");
+                    }
                     if (_position + offset > _length)
+                    {
                         throw new ArgumentException("Cannot seek after ending.");
+                    }
                     // Add offset to current _position
-                    _position = _position + offset;
+                    _position += offset;
                     break;
             }
 
@@ -307,10 +290,7 @@ namespace Toolbox.IO
         /// Always throws NotSupportedException
         /// </summary>
         /// <param name="value"></param>
-        public override void SetLength(long value)
-        {
-            throw new NotSupportedException();
-        }
+        public override void SetLength(long value) => throw new NotSupportedException();
 
         /// <summary>
         /// Always throws NotSupportedException
@@ -318,10 +298,7 @@ namespace Toolbox.IO
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            throw new NotSupportedException();
-        }
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
 
         /// <summary>
         /// Closes connection to FTP

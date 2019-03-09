@@ -11,10 +11,9 @@ namespace Toolbox.Xml.Extensions
     {
         public static DateTimeOffset ReadElementContentAsDateTimeOffset(this XmlReader reader)
         {
-            DateTimeOffset dateTime;
             string content = reader.ReadElementContentAsString();
 
-            if(!DateTimeOffset.TryParse(content, out dateTime))
+            if (!DateTimeOffset.TryParse(content, out DateTimeOffset dateTime))
             {
                 throw new InvalidCastException();
             }

@@ -13,7 +13,7 @@ namespace Toolbox.IO
         private const int DEFAULT_TIMEOUT_READ = 30000;
         private const int DEFAULT_TIMEOUT_WRITE = 30000;
 
-        private Stream _baseStream;
+        private readonly Stream _baseStream;
 
         private CancellationTokenSource _source;
 
@@ -56,10 +56,7 @@ namespace Toolbox.IO
             set => _baseStream.Position = value;
         }
 
-        public override void Flush()
-        {
-            _baseStream.Flush();
-        }
+        public override void Flush() => _baseStream.Flush();
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -88,15 +85,9 @@ namespace Toolbox.IO
             return result;
         }
 
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            return _baseStream.Seek(offset, origin);
-        }
+        public override long Seek(long offset, SeekOrigin origin) => _baseStream.Seek(offset, origin);
 
-        public override void SetLength(long value)
-        {
-            _baseStream.SetLength(value);
-        }
+        public override void SetLength(long value) => _baseStream.SetLength(value);
 
         public override void Write(byte[] buffer, int offset, int count)
         {

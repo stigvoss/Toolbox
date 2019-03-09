@@ -9,7 +9,7 @@ namespace Toolbox.Collections.Concurrent
 {
     public class ConcurrentHashSet<T> : ISet<T>
     {
-        HashSet<T> _hashSet;
+        readonly HashSet<T> _hashSet;
 
         public ConcurrentHashSet()
             : this(new HashSet<T>()) { }
@@ -19,21 +19,9 @@ namespace Toolbox.Collections.Concurrent
             _hashSet = hashSet;
         }
 
-        public int Count
-        {
-            get
-            {
-                return _hashSet.Count;
-            }
-        }
+        public int Count => _hashSet.Count;
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReadOnly => false;
 
         public bool Add(T item)
         {
@@ -75,10 +63,7 @@ namespace Toolbox.Collections.Concurrent
             }
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _hashSet.GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => _hashSet.GetEnumerator();
 
         public void IntersectWith(IEnumerable<T> other)
         {
@@ -168,9 +153,6 @@ namespace Toolbox.Collections.Concurrent
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _hashSet.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _hashSet.GetEnumerator();
     }
 }
