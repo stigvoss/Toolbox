@@ -16,7 +16,7 @@ namespace Toolbox.Extensions
 
         public static byte[] ToBytes(this string value, Encoding encoding = null)
         {
-            if(encoding is null)
+            if (encoding is null)
             {
                 encoding = Encoding.UTF8;
             }

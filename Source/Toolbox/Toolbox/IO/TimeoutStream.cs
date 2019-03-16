@@ -12,9 +12,6 @@ namespace Toolbox.IO
     {
         private const int DEFAULT_TIMEOUT_READ = 30000;
         private const int DEFAULT_TIMEOUT_WRITE = 30000;
-
-        private readonly Stream _baseStream;
-
         private CancellationTokenSource _source;
 
         private int _readTimeout = DEFAULT_TIMEOUT_READ;
@@ -22,19 +19,19 @@ namespace Toolbox.IO
 
         public TimeoutStream(Stream stream)
         {
-            _baseStream = stream;
+            BaseStream = stream;
             _source = new CancellationTokenSource();
         }
 
-        public Stream BaseStream => _baseStream;
+        public Stream BaseStream { get; }
 
-        public override bool CanRead => _baseStream.CanRead;
+        public override bool CanRead => BaseStream.CanRead;
 
-        public override bool CanSeek => _baseStream.CanSeek;
+        public override bool CanSeek => BaseStream.CanSeek;
 
-        public override bool CanWrite => _baseStream.CanWrite;
+        public override bool CanWrite => BaseStream.CanWrite;
 
-        public override long Length => _baseStream.Length;
+        public override long Length => BaseStream.Length;
 
         public override bool CanTimeout => true;
 
@@ -52,23 +49,23 @@ namespace Toolbox.IO
 
         public override long Position
         {
-            get => _baseStream.Position;
-            set => _baseStream.Position = value;
+            get => BaseStream.Position;
+            set => BaseStream.Position = value;
         }
 
-        public override void Flush() => _baseStream.Flush();
+        public override void Flush() => BaseStream.Flush();
 
         public override int Read(byte[] buffer, int offset, int count)
         {
             int result;
 
-            if (_baseStream.CanRead && !_baseStream.CanTimeout)
+            if (BaseStream.CanRead && !BaseStream.CanTimeout)
             {
                 try
                 {
                     _source.CancelAfter(_readTimeout);
-                    Task<int> task = _baseStream.ReadAsync(buffer, offset, count, 
-                        _source.Token);
+                    Task<int> task = BaseStream.ReadAsync(
+                        buffer, offset, count, _source.Token);
                     result = task.Result;
                 }
                 catch (AggregateException)
@@ -79,24 +76,24 @@ namespace Toolbox.IO
             }
             else
             {
-                result = _baseStream.Read(buffer, offset, count);
+                result = BaseStream.Read(buffer, offset, count);
             }
 
             return result;
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => _baseStream.Seek(offset, origin);
+        public override long Seek(long offset, SeekOrigin origin) => BaseStream.Seek(offset, origin);
 
-        public override void SetLength(long value) => _baseStream.SetLength(value);
+        public override void SetLength(long value) => BaseStream.SetLength(value);
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            if (_baseStream.CanWrite && !_baseStream.CanTimeout)
+            if (BaseStream.CanWrite && !BaseStream.CanTimeout)
             {
                 try
                 {
                     _source.CancelAfter(_readTimeout);
-                    Task task = _baseStream.WriteAsync(buffer, offset, count, _source.Token);
+                    Task task = BaseStream.WriteAsync(buffer, offset, count, _source.Token);
                     task.Wait();
                 }
                 catch (AggregateException)
@@ -107,7 +104,7 @@ namespace Toolbox.IO
             }
             else
             {
-                _baseStream.Write(buffer, offset, count);
+                BaseStream.Write(buffer, offset, count);
             }
         }
     }
