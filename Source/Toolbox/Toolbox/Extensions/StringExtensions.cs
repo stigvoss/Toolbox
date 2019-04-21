@@ -11,21 +11,11 @@ namespace Toolbox.Extensions
     {
         public static string ToTitleCase(this string text)
         {
-            if (text is null)
-            {
-                return null;
-            }
-
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(text.ToLower());
         }
 
-        public static byte[] ToBytes(this string value, Encoding encoding = null)
+        public static byte[] ToBytes(this string value, Encoding? encoding = null)
         {
-            if (value is null)
-            {
-                return null;
-            }
-
             if (encoding is null)
             {
                 encoding = Encoding.UTF8;
