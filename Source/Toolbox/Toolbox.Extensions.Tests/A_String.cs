@@ -26,19 +26,5 @@ namespace Toolbox.Extensions.Tests
 
             Assert.AreEqual(expected, bytes);
         }
-
-        [Test]
-        public void Can_ToTitleCase_Handle_Null()
-        {
-            var actual = (null as string).ToTitleCase();
-            Assert.AreEqual(null, actual);
-        }
-
-        [Test]
-        public void Can_ToBytes_Handle_Null()
-        {
-            var actual = (null as string).ToBytes();
-            Assert.AreEqual(null, actual);
-        }
     }
 }
