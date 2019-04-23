@@ -9,10 +9,12 @@ namespace Toolbox.Xml.Extensions
 {
     public static class XmlNodeExtensions
     {
-        public static T GetElementContentAs<T>(this XmlNode node, string xpath, XmlNamespaceManager nsmgr = null)
+        public static T GetElementContentAs<T>(this XmlNode node, string xpath, XmlNamespaceManager? nsmgr = null)
         {
             XmlNode element;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             T result = default;
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
             if (nsmgr != null)
             {
@@ -29,7 +31,9 @@ namespace Toolbox.Xml.Extensions
                 result = element.GetElementContentAs<T>();
             }
 
+#pragma warning disable CS8603 // Possible null reference return.
             return result;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public static T GetElementContentAs<T>(this XmlNode node)
