@@ -11,8 +11,6 @@ namespace Toolbox.IO
     /// </summary>
     public class SeekableFtpFileStream : Stream, IDisposable
     {
-        // Request URI saved to create new requests
-        private readonly Uri? _requestUri;
         // Length of file requested, used for boundary when seeking
         private readonly long _length;
 
