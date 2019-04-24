@@ -52,16 +52,7 @@ namespace Toolbox.IO
         /// </summary>
         /// <param name="requestUri">Address for requests</param>
         public SeekableFtpFileStream(Uri requestUri)
-        {
-            _requestUri = requestUri;
-
-            _requestFactory = () => (FtpWebRequest)WebRequest.Create(requestUri);
-
-            OpenConnection();
-            // Get filesize from FTP
-            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
-            CloseConnection();
-        }
+            : this(() => (FtpWebRequest)WebRequest.Create(requestUri)) { }
 
         /// <summary>
         /// Open a new connection to FTP
