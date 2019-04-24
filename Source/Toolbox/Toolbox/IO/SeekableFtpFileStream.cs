@@ -17,7 +17,7 @@ namespace Toolbox.IO
     public class SeekableFtpFileStream : Stream, IDisposable
     {
         // Request URI saved to create new requests
-        private readonly Uri _requestUri;
+        private readonly Uri? _requestUri;
         // Length of file requested, used for boundary when seeking
         private readonly long _length;
 
@@ -27,14 +27,14 @@ namespace Toolbox.IO
         private long _cursor = 0;
 
         // Request field for cloning the request when creating new request
-        private readonly FtpWebRequest _request = null;
+        private readonly FtpWebRequest? _request = null;
         // Response field to allow closing connections
-        private FtpWebResponse _response = null;
+        private FtpWebResponse? _response = null;
 
         private bool _isDisposed = false;
 
         // Response stream field for reading
-        private Stream _stream;
+        private Stream? _stream;
 
         /// <summary>
         /// Create instance with basic WebRequest from URI string
@@ -52,7 +52,7 @@ namespace Toolbox.IO
 
             OpenConnection();
             // Get filesize from FTP
-            _length = _response.ContentLength;
+            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
             CloseConnection();
         }
 
@@ -67,7 +67,7 @@ namespace Toolbox.IO
 
             OpenConnection();
             // Get filesize from FTP
-            _length = _response.ContentLength;
+            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
             CloseConnection();
         }
 
@@ -220,7 +220,7 @@ namespace Toolbox.IO
             }
 
             // Read from _stream
-            int bytesRead = _stream.Read(buffer, offset, count);
+            int bytesRead = _stream?.Read(buffer, offset, count) ?? throw new ArgumentNullException(nameof(_stream));
 
             // Move _cursor position
             _cursor += bytesRead;
