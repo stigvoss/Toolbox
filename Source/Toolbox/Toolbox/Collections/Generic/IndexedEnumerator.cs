@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Toolbox.Collections.Generic
 {
@@ -30,7 +26,7 @@ namespace Toolbox.Collections.Generic
 
         public bool MoveNext()
         {
-            bool result = _enumerator.MoveNext();
+            var result = _enumerator.MoveNext();
 
             if (result)
             {

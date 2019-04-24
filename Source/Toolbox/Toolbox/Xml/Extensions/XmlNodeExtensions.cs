@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Toolbox.Xml.Extensions
@@ -16,7 +12,7 @@ namespace Toolbox.Xml.Extensions
             T result = default;
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
-            if (nsmgr != null)
+            if (nsmgr is object)
             {
                 element = node.SelectSingleNode(xpath, nsmgr);
             }
@@ -26,7 +22,7 @@ namespace Toolbox.Xml.Extensions
             }
 
 
-            if (element != null)
+            if (element is object)
             {
                 result = element.GetElementContentAs<T>();
             }
@@ -38,7 +34,7 @@ namespace Toolbox.Xml.Extensions
 
         public static T GetElementContentAs<T>(this XmlNode node)
         {
-            string value = node.InnerText;
+            var value = node.InnerText;
             T result = (T)Convert.ChangeType(value, typeof(T));
             return result;
         }

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Toolbox.IO.Extensions;
 
 namespace Toolbox.IO
@@ -92,20 +87,7 @@ namespace Toolbox.IO
         /// <returns>FtpWebRequest</returns>
         private FtpWebRequest CreateRequest()
         {
-            FtpWebRequest request;
-
-            // If _request is set, clone the request
-            // Else create new request
-            if (_request != null)
-            {
-                request = _request.Clone();
-            }
-            else
-            {
-                request = (FtpWebRequest)WebRequest.Create(_requestUri);
-            }
-
-            return request;
+            return _request?.Clone() ?? (FtpWebRequest)WebRequest.Create(_requestUri);
         }
 
         /// <summary>
@@ -114,7 +96,7 @@ namespace Toolbox.IO
         /// <param name="offset">Offset on file stream</param>
         private void Connect(long offset = 0)
         {
-            FtpWebRequest request = CreateRequest();
+            var request = CreateRequest();
             Connect(request, offset);
         }
 
@@ -144,14 +126,14 @@ namespace Toolbox.IO
         private void CloseConnection()
         {
             // Clean up response if exists
-            if (_response != null)
+            if (_response is object)
             {
                 _response.Dispose();
                 _response = null;
             }
 
             // Clean up stream if exists
-            if (_stream != null)
+            if (_stream is object)
             {
                 _stream.Dispose();
                 _stream = null;
@@ -203,7 +185,7 @@ namespace Toolbox.IO
         public override int Read(byte[] buffer, int offset, int count)
         {
             // If _cursor is further ahead on stream than request _position or _stream is null
-            if (IsCursorAhead || _stream == null)
+            if (IsCursorAhead || _stream is null)
             {
                 // Open new connection
                 OpenConnection(_position);

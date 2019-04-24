@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Toolbox.Extensions
 {
@@ -11,8 +7,7 @@ namespace Toolbox.Extensions
     {
         public static DriveInfo GetDriveInfo(this Uri uri)
         {
-            string root = Path.GetPathRoot(uri.LocalPath);
-            return new DriveInfo(root);
+            return new DriveInfo(Path.GetPathRoot(uri.LocalPath));
         }
 
         public static DirectoryInfo GetDirectoryInfo(this Uri uri)

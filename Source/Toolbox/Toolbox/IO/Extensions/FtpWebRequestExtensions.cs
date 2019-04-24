@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Toolbox.IO;
 
 namespace Toolbox.IO.Extensions
 {
@@ -19,29 +13,27 @@ namespace Toolbox.IO.Extensions
 
         public static FtpWebRequest Clone(this FtpWebRequest request)
         {
-            Type type = typeof(FtpWebRequest);
+            var type = typeof(FtpWebRequest);
 
-            FtpWebRequest clone = (FtpWebRequest)WebRequest.Create(request.RequestUri);
+            var clone = (FtpWebRequest)WebRequest.Create(request.RequestUri);
 
-            PropertyInfo[] properties = type.GetProperties();
-
-            foreach (PropertyInfo property in properties)
+            foreach (var property in type.GetProperties())
             {
                 if (property.CanRead && property.CanWrite)
                 {
                     try
                     {
-                        object originalValue = property.GetValue(request);
-                        object cloneValue = property.GetValue(clone);
+                        var originalValue = property.GetValue(request);
+                        var cloneValue = property.GetValue(clone);
 
-                        if (originalValue != null && !originalValue.Equals(cloneValue))
+                        if (originalValue is object && !originalValue.Equals(cloneValue))
                         {
                             property.SetValue(clone, originalValue);
                         }
                     }
                     catch (TargetInvocationException ex)
                     {
-                        Type exceptionType = ex.InnerException.GetType();
+                        var exceptionType = ex.InnerException.GetType();
                         if (exceptionType != typeof(NotSupportedException) && exceptionType != typeof(NotImplementedException))
                         {
                             throw ex;
