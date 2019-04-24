@@ -27,7 +27,7 @@ namespace Toolbox.IO
         private long _cursor = 0;
 
         // Request field for cloning the request when creating new request
-        private readonly FtpWebRequest? _request = null;
+        private readonly Func<FtpWebRequest> _requestFactory;
         // Response field to allow closing connections
         private FtpWebResponse? _response = null;
 
@@ -35,6 +35,11 @@ namespace Toolbox.IO
 
         // Response stream field for reading
         private Stream? _stream;
+
+        public SeekableFtpFileStream(Func<FtpWebRequest> factory)
+        {
+            _requestFactory = factory;
+        }
 
         /// <summary>
         /// Create instance with basic WebRequest from URI string
@@ -50,22 +55,9 @@ namespace Toolbox.IO
         {
             _requestUri = requestUri;
 
-            OpenConnection();
-            // Get filesize from FTP
-            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
-            CloseConnection();
-        }
+            _requestFactory = () => (FtpWebRequest)WebRequest.Create(requestUri);
 
-        /// <summary>
-        /// Create instance from WebRequest
-        /// </summary>
-        /// <param name="request">Custom FTP WebRequest</param>
-        public SeekableFtpFileStream(FtpWebRequest request)
-        {
-            // Assign request to field for later cloning
-            _request = request;
-
-            OpenConnection();
+            OpenConnectionWith();
             // Get filesize from FTP
             _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
             CloseConnection();
@@ -75,7 +67,7 @@ namespace Toolbox.IO
         /// Open a new connection to FTP
         /// </summary>
         /// <param name="offset">Offset on file stream</param>
-        private void OpenConnection(long offset = 0)
+        private void OpenConnectionWith(long offset = 0)
         {
             // Close any existing connections to FTP
             CloseConnection();
@@ -86,35 +78,12 @@ namespace Toolbox.IO
         }
 
         /// <summary>
-        /// Creating a new FtpWebRequest.
-        /// Clones or creates request.
-        /// </summary>
-        /// <returns>FtpWebRequest</returns>
-        private FtpWebRequest CreateRequest()
-        {
-            FtpWebRequest request;
-
-            // If _request is set, clone the request
-            // Else create new request
-            if (_request != null)
-            {
-                request = _request.Clone();
-            }
-            else
-            {
-                request = (FtpWebRequest)WebRequest.Create(_requestUri);
-            }
-
-            return request;
-        }
-
-        /// <summary>
         /// Create new request with offset
         /// </summary>
         /// <param name="offset">Offset on file stream</param>
         private void Connect(long offset = 0)
         {
-            FtpWebRequest request = CreateRequest();
+            FtpWebRequest request = _requestFactory();
             Connect(request, offset);
         }
 
@@ -206,7 +175,7 @@ namespace Toolbox.IO
             if (IsCursorAhead || _stream == null)
             {
                 // Open new connection
-                OpenConnection(_position);
+                OpenConnectionWith(_position);
             }
             // If _cursor is behind _position, read till position
             else if (IsCursorBehind)
