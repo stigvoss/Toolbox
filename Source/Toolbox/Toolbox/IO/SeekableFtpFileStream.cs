@@ -22,7 +22,7 @@ namespace Toolbox.IO
         private long _cursor = 0;
 
         // Request field for cloning the request when creating new request
-        private readonly FtpWebRequest? _request = null;
+        private readonly Func<FtpWebRequest> _requestFactory;
         // Response field to allow closing connections
         private FtpWebResponse? _response = null;
 
@@ -30,6 +30,11 @@ namespace Toolbox.IO
 
         // Response stream field for reading
         private Stream? _stream;
+
+        public SeekableFtpFileStream(Func<FtpWebRequest> factory)
+        {
+            _requestFactory = factory;
+        }
 
         /// <summary>
         /// Create instance with basic WebRequest from URI string
@@ -45,20 +50,7 @@ namespace Toolbox.IO
         {
             _requestUri = requestUri;
 
-            OpenConnection();
-            // Get filesize from FTP
-            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
-            CloseConnection();
-        }
-
-        /// <summary>
-        /// Create instance from WebRequest
-        /// </summary>
-        /// <param name="request">Custom FTP WebRequest</param>
-        public SeekableFtpFileStream(FtpWebRequest request)
-        {
-            // Assign request to field for later cloning
-            _request = request;
+            _requestFactory = () => (FtpWebRequest)WebRequest.Create(requestUri);
 
             OpenConnection();
             // Get filesize from FTP
@@ -81,22 +73,12 @@ namespace Toolbox.IO
         }
 
         /// <summary>
-        /// Creating a new FtpWebRequest.
-        /// Clones or creates request.
-        /// </summary>
-        /// <returns>FtpWebRequest</returns>
-        private FtpWebRequest CreateRequest()
-        {
-            return _request?.Clone() ?? (FtpWebRequest)WebRequest.Create(_requestUri);
-        }
-
-        /// <summary>
         /// Create new request with offset
         /// </summary>
         /// <param name="offset">Offset on file stream</param>
         private void Connect(long offset = 0)
         {
-            var request = CreateRequest();
+            FtpWebRequest request = _requestFactory();
             Connect(request, offset);
         }
 
