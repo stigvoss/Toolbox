@@ -34,6 +34,11 @@ namespace Toolbox.IO
         public SeekableFtpFileStream(Func<FtpWebRequest> factory)
         {
             _requestFactory = factory;
+
+            OpenConnection();
+            // Get filesize from FTP
+            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
+            CloseConnection();
         }
 
         /// <summary>
