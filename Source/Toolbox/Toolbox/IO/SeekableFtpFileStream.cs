@@ -39,6 +39,11 @@ namespace Toolbox.IO
         public SeekableFtpFileStream(Func<FtpWebRequest> factory)
         {
             _requestFactory = factory;
+
+            OpenConnection();
+            // Get filesize from FTP
+            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
+            CloseConnection();
         }
 
         /// <summary>
@@ -57,7 +62,7 @@ namespace Toolbox.IO
 
             _requestFactory = () => (FtpWebRequest)WebRequest.Create(requestUri);
 
-            OpenConnectionWith();
+            OpenConnection();
             // Get filesize from FTP
             _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
             CloseConnection();
@@ -67,7 +72,7 @@ namespace Toolbox.IO
         /// Open a new connection to FTP
         /// </summary>
         /// <param name="offset">Offset on file stream</param>
-        private void OpenConnectionWith(long offset = 0)
+        private void OpenConnection(long offset = 0)
         {
             // Close any existing connections to FTP
             CloseConnection();
@@ -175,7 +180,7 @@ namespace Toolbox.IO
             if (IsCursorAhead || _stream == null)
             {
                 // Open new connection
-                OpenConnectionWith(_position);
+                OpenConnection(_position);
             }
             // If _cursor is behind _position, read till position
             else if (IsCursorBehind)
