@@ -24,7 +24,7 @@ namespace Toolbox.IO
         // Pointing to the current reading position on the stream
         private long _cursor = 0;
 
-        // Request field for cloning the request when creating new request
+        // Request factory field for creating the request for streaming a file
         private readonly Func<FtpWebRequest> _requestFactory;
         // Response field to allow closing connections
         private FtpWebResponse? _response = null;
