@@ -29,6 +29,10 @@ namespace Toolbox.IO
         // Response stream field for reading
         private Stream? _stream;
 
+        /// <summary>
+        /// Create an instance with a FtpWebRequest factory method to enable dynamic creation of FtpWebRequests.
+        /// </summary>
+        /// <param name="factory">Factory method for creating the desired FtpWebRequest.</param>
         public SeekableFtpFileStream(Func<FtpWebRequest> factory)
         {
             _requestFactory = factory;
