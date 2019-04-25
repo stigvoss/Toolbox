@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
 using System.Linq;
-using System;
 using Toolbox.Collections.Generic.Extensions;
 
 namespace Toolbox.Extensions.Tests

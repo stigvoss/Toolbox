@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Toolbox.Xml.Extensions
@@ -11,7 +7,7 @@ namespace Toolbox.Xml.Extensions
     {
         public static DateTimeOffset ReadElementContentAsDateTimeOffset(this XmlReader reader)
         {
-            string content = reader.ReadElementContentAsString();
+            var content = reader.ReadElementContentAsString();
 
             if (!DateTimeOffset.TryParse(content, out DateTimeOffset dateTime))
             {

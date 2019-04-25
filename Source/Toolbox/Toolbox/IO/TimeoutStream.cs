@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Toolbox.IO
 {
@@ -64,8 +60,7 @@ namespace Toolbox.IO
                 try
                 {
                     _source.CancelAfter(_readTimeout);
-                    Task<int> task = BaseStream.ReadAsync(
-                        buffer, offset, count, _source.Token);
+                    var task = BaseStream.ReadAsync(buffer, offset, count, _source.Token);
                     result = task.Result;
                 }
                 catch (AggregateException)
@@ -93,7 +88,7 @@ namespace Toolbox.IO
                 try
                 {
                     _source.CancelAfter(_readTimeout);
-                    Task task = BaseStream.WriteAsync(buffer, offset, count, _source.Token);
+                    var task = BaseStream.WriteAsync(buffer, offset, count, _source.Token);
                     task.Wait();
                 }
                 catch (AggregateException)

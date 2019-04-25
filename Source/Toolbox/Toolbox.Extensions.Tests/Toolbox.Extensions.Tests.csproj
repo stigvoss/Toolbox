@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="An_IEnumerable.cs" />
+    <Compile Include="A_ByteArray.cs" />
+    <Compile Include="A_HexString.cs" />
     <Compile Include="A_String.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

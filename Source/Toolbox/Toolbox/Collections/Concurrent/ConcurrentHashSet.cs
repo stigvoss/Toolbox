@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Toolbox.Collections.Concurrent
 {
@@ -14,10 +10,7 @@ namespace Toolbox.Collections.Concurrent
         public ConcurrentHashSet()
             : this(new HashSet<T>()) { }
 
-        public ConcurrentHashSet(HashSet<T> hashSet)
-        {
-            _hashSet = hashSet;
-        }
+        public ConcurrentHashSet(HashSet<T> hashSet) => _hashSet = hashSet;
 
         public int Count => _hashSet.Count;
 

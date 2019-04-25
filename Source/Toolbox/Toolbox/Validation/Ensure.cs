@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Toolbox.Validation
 {
@@ -19,7 +14,7 @@ namespace Toolbox.Validation
         public static void IsNull<TException>(this object subject, string? message = null)
             where TException : Exception
         {
-            subject.If(e => e != null, typeof(TException), message);
+            subject.If(e => e is object, typeof(TException), message);
         }
 
         //IsNotNull();
