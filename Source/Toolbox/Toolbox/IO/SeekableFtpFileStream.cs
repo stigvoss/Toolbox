@@ -11,8 +11,6 @@ namespace Toolbox.IO
     /// </summary>
     public class SeekableFtpFileStream : Stream, IDisposable
     {
-        // Request URI saved to create new requests
-        private readonly Uri? _requestUri;
         // Length of file requested, used for boundary when seeking
         private readonly long _length;
 
@@ -21,8 +19,8 @@ namespace Toolbox.IO
         // Pointing to the current reading position on the stream
         private long _cursor = 0;
 
-        // Request field for cloning the request when creating new request
-        private readonly FtpWebRequest? _request = null;
+        // Request factory field for creating the request for streaming a file
+        private readonly Func<FtpWebRequest> _requestFactory;
         // Response field to allow closing connections
         private FtpWebResponse? _response = null;
 
@@ -30,6 +28,20 @@ namespace Toolbox.IO
 
         // Response stream field for reading
         private Stream? _stream;
+
+        /// <summary>
+        /// Create an instance with a FtpWebRequest factory method to enable dynamic creation of FtpWebRequests.
+        /// </summary>
+        /// <param name="factory">Factory method for creating the desired FtpWebRequest.</param>
+        public SeekableFtpFileStream(Func<FtpWebRequest> factory)
+        {
+            _requestFactory = factory;
+
+            OpenConnection();
+            // Get filesize from FTP
+            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
+            CloseConnection();
+        }
 
         /// <summary>
         /// Create instance with basic WebRequest from URI string
@@ -42,29 +54,7 @@ namespace Toolbox.IO
         /// </summary>
         /// <param name="requestUri">Address for requests</param>
         public SeekableFtpFileStream(Uri requestUri)
-        {
-            _requestUri = requestUri;
-
-            OpenConnection();
-            // Get filesize from FTP
-            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
-            CloseConnection();
-        }
-
-        /// <summary>
-        /// Create instance from WebRequest
-        /// </summary>
-        /// <param name="request">Custom FTP WebRequest</param>
-        public SeekableFtpFileStream(FtpWebRequest request)
-        {
-            // Assign request to field for later cloning
-            _request = request;
-
-            OpenConnection();
-            // Get filesize from FTP
-            _length = _response?.ContentLength ?? throw new ArgumentNullException(nameof(_response));
-            CloseConnection();
-        }
+            : this(() => (FtpWebRequest)WebRequest.Create(requestUri)) { }
 
         /// <summary>
         /// Open a new connection to FTP
@@ -81,22 +71,12 @@ namespace Toolbox.IO
         }
 
         /// <summary>
-        /// Creating a new FtpWebRequest.
-        /// Clones or creates request.
-        /// </summary>
-        /// <returns>FtpWebRequest</returns>
-        private FtpWebRequest CreateRequest()
-        {
-            return _request?.Clone() ?? (FtpWebRequest)WebRequest.Create(_requestUri);
-        }
-
-        /// <summary>
         /// Create new request with offset
         /// </summary>
         /// <param name="offset">Offset on file stream</param>
         private void Connect(long offset = 0)
         {
-            var request = CreateRequest();
+            FtpWebRequest request = _requestFactory();
             Connect(request, offset);
         }
 
