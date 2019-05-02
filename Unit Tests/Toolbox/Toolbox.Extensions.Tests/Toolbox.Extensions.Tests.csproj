@@ -59,7 +59,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Toolbox\Toolbox.csproj">
+    <ProjectReference Include="..\..\..\Source\Toolbox\Toolbox\Toolbox.csproj">
       <Project>{b331d3de-2dcf-4c2c-bb12-d444b53180db}</Project>
       <Name>Toolbox</Name>
     </ProjectReference>

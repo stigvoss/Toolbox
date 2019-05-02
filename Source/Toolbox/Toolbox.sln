@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{040EACF1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Validation.Tests", "..\..\Unit Tests\Toolbox\Toolbox.Validation.Tests\Toolbox.Validation.Tests.csproj", "{5C6C4999-1DDD-4101-AC72-790AB5A8A3F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Extensions.Tests", "Toolbox.Extensions.Tests\Toolbox.Extensions.Tests.csproj", "{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox.Extensions.Tests", "..\..\Unit Tests\Toolbox\Toolbox.Extensions.Tests\Toolbox.Extensions.Tests.csproj", "{B4B24E7F-1EE6-4211-A67A-1798FE59EEA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
