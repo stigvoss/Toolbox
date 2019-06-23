@@ -38,23 +38,30 @@ namespace Toolbox.Collections.Generic.Extensions
             return new IndexedEnumerable<TResult>(collection);
         }
 
-        public static IEnumerable<Task> ParallelForEachAsync<T>(this IEnumerable<T> enumerable, Action<T> action)
+        public static async Task ParallelForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
         {
-            return enumerable.ParallelForEachAsync(action, Environment.ProcessorCount);
+            await enumerable.ParallelForEachAsync(action, Environment.ProcessorCount);
         }
 
-        public static IEnumerable<Task> ParallelForEachAsync<T>(this IEnumerable<T> enumerable, Action<T> action, int processorCount)
+        public static async Task ParallelForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action, int threadCount)
         {
-            var semaphore = new SemaphoreSlim(processorCount);
+            using var semaphore = new Semaphore(threadCount, threadCount);
 
-            return enumerable.Select(async item =>
+            var tasks = enumerable.Select(async item =>
             {
-                await semaphore.WaitAsync();
+                semaphore.WaitOne();
 
-                await Task.Run(() => action(item));
-
-                semaphore.Release();
+                try
+                {
+                    await action(item);
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
             });
+
+            await Task.WhenAll(tasks);
         }
     }
 }
